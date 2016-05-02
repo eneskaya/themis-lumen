@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use r;
+
 class ExampleController extends Controller
 {
     /**
@@ -11,7 +13,7 @@ class ExampleController extends Controller
      */
     public function __construct()
     {
-        //
+
     }
 
     //

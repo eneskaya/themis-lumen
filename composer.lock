@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "98793ced0ec0ab80641d734644f9cc13",
-    "content-hash": "47879cfced177a0d1432a3c06e7bb324",
+    "hash": "67f24af92ad1466ff10488f8cd003ae8",
+    "content-hash": "e24f92efa96c3f91b809d9de7b160438",
     "packages": [
         {
             "name": "danielmewes/php-rql",
@@ -126,6 +126,53 @@
                 "string"
             ],
             "time": "2015-11-06 14:35:42"
+        },
+        {
+            "name": "duxet/laravel-rethinkdb",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/duxet/laravel-rethinkdb.git",
+                "reference": "64b942a6ba255f0e4376b4db5a5cd71be9b8fcc5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/duxet/laravel-rethinkdb/zipball/64b942a6ba255f0e4376b4db5a5cd71be9b8fcc5",
+                "reference": "64b942a6ba255f0e4376b4db5a5cd71be9b8fcc5",
+                "shasum": ""
+            },
+            "require": {
+                "danielmewes/php-rql": "~2.2.0",
+                "illuminate/container": ">=5.0.0",
+                "illuminate/contracts": ">=5.0.0",
+                "illuminate/database": ">=5.0.0",
+                "illuminate/support": ">=5.0.0",
+                "php": ">=5.5.0"
+            },
+            "require-dev": {
+                "codeclimate/php-test-reporter": "0.1.*@dev",
+                "mockery/mockery": "0.9.*@dev",
+                "orchestra/testbench": "3.0.*",
+                "phpunit/phpunit": "~4.0",
+                "psr/log": "1.0.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "duxet\\Rethinkdb\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "duxet"
+                }
+            ],
+            "description": "RethinkDB adapter for Laravel",
+            "time": "2016-02-13 13:52:32"
         },
         {
             "name": "illuminate/auth",
@@ -3265,7 +3312,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "duxet/laravel-rethinkdb": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
