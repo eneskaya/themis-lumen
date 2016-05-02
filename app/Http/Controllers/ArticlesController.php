@@ -15,7 +15,9 @@ class ArticlesController extends Controller
 
     public function getArticles()
     {
-        $articles = r\table('pages');
-        return $articles;
+        $articles = r\table('pages')->run($this->conn);
+        foreach ($articles as $article) {
+            dd($article);
+        }
     }
 }
