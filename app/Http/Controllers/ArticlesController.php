@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use r;
 
 class ArticlesController extends Controller
@@ -10,14 +11,12 @@ class ArticlesController extends Controller
 
     public function __construct()
     {
-        $this->conn = r\connect('localhost', 28015, 'themis');
+        $this->conn = r\connect('192.168.33.10', 28015, 'themis');
     }
 
-    public function getArticles()
+    public function getArticles(Request $request)
     {
-        $articles = r\table('pages')->run($this->conn);
-        foreach ($articles as $article) {
-            dd($article);
-        }
+        $articlesCursor = r\table('pages')->run($this->conn);
+        return $articlesCursor->current();
     }
 }
