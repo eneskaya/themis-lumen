@@ -11,7 +11,7 @@ class ArticlesController extends Controller
 
     public function __construct()
     {
-        $this->conn = r\connect('192.168.33.10', 28015, 'themis');
+        $this->conn = r\connect(env('RDB_HOST'), 28015, 'themis');
     }
 
     public function getArticles(Request $request)
