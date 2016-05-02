@@ -15,4 +15,4 @@ $app->get('/', function () use ($app) {
     return $app->version();
 });
 
-$app->get('articles', 'ArticlesController@getArticles');
+$app->get('api/articles', 'ArticlesController@getArticles');
