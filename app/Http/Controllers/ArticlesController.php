@@ -13,6 +13,17 @@ class ArticlesController extends Controller
     {
         $this->conn = r\connect(env('RDB_HOST'), 28015, 'themis');
     }
+    
+    public function getArticle($id) {
+        $article =
+            r\table('pages')->get($id)->run($this->conn);
+
+        if ($article) {
+            return $article;
+        }
+
+        return response('No ID matching.', 404);
+    }
 
     public function getArticles(Request $request)
     {

@@ -16,3 +16,4 @@ $app->get('/', function () use ($app) {
 });
 
 $app->get('api/articles', 'ArticlesController@getArticles');
+$app->get('api/articles/{id}', 'ArticlesController@getArticle');
