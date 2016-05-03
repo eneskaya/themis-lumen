@@ -39,6 +39,8 @@ class ArticlesController extends Controller
         $nextPage   = $page + 1;
         $prevPage   = $page === 1 ? $page : $page - 1;
 
+        // Example:
+        //
         //  1 -> 1 - 16          0 * x + 1   ->  1 * x + 1
         //  2 -> 16 - 31         1 * x + 1   ->  2 * x + 1
         //  3 -> 31 - 46         2 * x + 1   ->  3 * x + 1
@@ -49,7 +51,7 @@ class ArticlesController extends Controller
 
         $articlesCursor =
             r\table('pages')->slice($sliceStart, $sliceEnd)->run($this->conn);
-        
+
         $response = collect();
 
         $nextPageLink   =
