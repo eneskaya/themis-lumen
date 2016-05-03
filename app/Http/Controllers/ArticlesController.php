@@ -18,12 +18,16 @@ class ArticlesController extends Controller
     {
         $this->validate($request, [
             'page'      => 'required|integer|min:0',
-            'limit'     => 'integer|min:1|max:30'
+            'limit'     => 'integer|min:1|max:30',
+            'except'    => 'alpha'
         ]);
 
-        $count  = $request->input('limit') ? intval($request->input('limit')) : 15;
-        $page   = intval($request->input('page'));
-        
+        $except     = $request->input('except');
+        $count      = $request->input('limit') ? intval($request->input('limit')) : 15;
+        $page       = intval($request->input('page'));
+        $nextPage   = $page + 1;
+        $prevPage   = $page === 1 ? $page : $page - 1;
+
         //  1 -> 1 - 16          0 * x + 1   ->  1 * x + 1
         //  2 -> 16 - 31         1 * x + 1   ->  2 * x + 1
         //  3 -> 31 - 46         2 * x + 1   ->  3 * x + 1
@@ -36,12 +40,31 @@ class ArticlesController extends Controller
             r\table('pages')->slice($sliceStart, $sliceEnd)->run($this->conn);
         
         $response = collect();
+
+        $nextPageLink   =
+             $except ?
+                 env('BASE_URL')."/articles?limit=$count&page=$nextPage&except=$except" :
+                 env('BASE_URL')."/articles?limit=$count&page=$nextPage";
+
+        $prevPageLink   =
+            $except ?
+                env('BASE_URL')."/articles?limit=$count&page=$prevPage&except=$except" :
+                env('BASE_URL')."/articles?limit=$count&page=$prevPage";
+
+
+        $response->put('count', $count);
         $response->put('data', collect());
+        $response->put('valid', $articlesCursor->valid());
+        $response->put('cursor', [
+            'next'      => $nextPageLink,
+            'previous'  => $prevPageLink
+        ]);
 
         foreach ($articlesCursor as $item) {
+            $item = $except ? array_except($item, [$request->input('except')]) : $item;
             $response->get('data')->push($item);
         }
-        
+
         return $response;
     }
 }
