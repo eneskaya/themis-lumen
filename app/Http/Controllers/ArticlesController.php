@@ -67,7 +67,6 @@ class ArticlesController extends Controller
 
         $response->put('count', $count);
         $response->put('data', collect());
-        $response->put('valid', $articlesCursor->valid());
         $response->put('cursor', [
             'next'      => $nextPageLink,
             'previous'  => $prevPageLink
