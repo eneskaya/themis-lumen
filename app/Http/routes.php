@@ -15,6 +15,6 @@ $app->get('/', function () use ($app) {
     return $app->version();
 });
 
-$app->get('api/articles', 'ArticlesController@getArticles');
-$app->get('api/articles/{id}', 'ArticlesController@getArticle');
-$app->get('api/experiments', 'ResultsController@getExperiments');
+$app->get('articles', 'ArticlesController@getArticles');
+$app->get('articles/{id}', 'ArticlesController@getArticle');
+$app->get('experiments', 'ResultsController@getExperiments');
