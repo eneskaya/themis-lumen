@@ -24,7 +24,7 @@ class ResultsController extends Controller
             $response->push($experiment);
         }
 
-        return $response;
+        return response($response, 200)->header('Access-Control-Allow-Origin', '*');
     }
 
 }
