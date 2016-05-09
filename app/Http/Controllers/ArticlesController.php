@@ -50,7 +50,7 @@ class ArticlesController extends Controller
         $sliceEnd   = ($page * $count);
 
         $articlesCursor =
-            r\table('pages')->slice($sliceStart, $sliceEnd)->run($this->conn);
+            r\table('pages')->orderBy("date")->slice($sliceStart, $sliceEnd)->run($this->conn);
 
         $response = collect();
 
