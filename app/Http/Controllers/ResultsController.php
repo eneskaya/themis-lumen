@@ -15,6 +15,16 @@ class ResultsController extends Controller
     }
 
     public function getExperiments(Request $request) {
+
+        $experiments = r\table('results')->run($this->conn);
+
+        $response = collect();
+
+        foreach ($experiments as $experiment) {
+            $response->push($experiment);
+        }
+
+        return $response;
     }
 
 }
