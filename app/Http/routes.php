@@ -17,4 +17,5 @@ $app->get('/', function () use ($app) {
 
 $app->get('articles', 'ArticlesController@getArticles');
 $app->get('articles/{id}', 'ArticlesController@getArticle');
+$app->post('articles', 'ArticlesController@getMultipeArticles');
 $app->get('experiments', 'ResultsController@getExperiments');

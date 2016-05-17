@@ -19,10 +19,10 @@ class ArticlesController extends Controller
             r\table('pages')->get($id)->run($this->conn);
 
         if ($article) {
-            return $article;
+            return response($article, 200)->header('Access-Control-Allow-Origin', '*');
         }
 
-        return response('No ID matching.', 404);
+        return response('No ID matching.', 404)->header('Access-Control-Allow-Origin', '*');
     }
 
     public function getArticles(Request $request)
@@ -78,5 +78,17 @@ class ArticlesController extends Controller
         }
 
         return response($response, 200)->header('Access-Control-Allow-Origin', '*');
+    }
+
+    public function getMultipeArticles(Request $request)
+    {
+        $this->validate($request, [
+           'ids' => 'required|array'
+        ]);
+
+        $cursor =
+            r\table('pages')->getAll($request->input('ids'))->run($this->conn);
+
+        return response($cursor)->headers;
     }
 }
