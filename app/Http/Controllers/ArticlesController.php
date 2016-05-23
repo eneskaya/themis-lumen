@@ -92,7 +92,8 @@ class ArticlesController extends Controller
         return response($cursor)->headers;
     }
 
-    public function getClusters() {
+    public function getClusters()
+    {
         $clusters =
             r\table('clusters')->run($this->conn);
 
@@ -103,5 +104,10 @@ class ArticlesController extends Controller
         }
 
         return response($response, 200)->header('Access-Control-Allow-Origin', '*');
+    }
+
+    public function getArticlesForCluster(Request $request)
+    {
+        
     }
 }

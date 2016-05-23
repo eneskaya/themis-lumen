@@ -16,7 +16,7 @@ class ResultsController extends Controller
 
     public function getExperiments(Request $request) {
 
-        $experiments = r\table('results')->run($this->conn);
+        $experiments = r\table('results')->orderBy('createdAt')->run($this->conn);
 
         $response = collect();
 
