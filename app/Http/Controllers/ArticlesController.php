@@ -91,4 +91,21 @@ class ArticlesController extends Controller
 
         return response($cursor)->headers;
     }
+
+    public function getClusters(Request $request) {
+        $this->validate($request, [
+            'cluster_id' => 'required',
+        ]);
+
+        $clusters =
+            r\table('clusters')->run($this->conn);
+
+        $response = collect();
+
+        foreach ($clusters as $cluster) {
+            $response->push($cluster);
+        }
+
+        return response($response, 200)->header('Access-Control-Allow-Origin', '*');
+    }
 }
