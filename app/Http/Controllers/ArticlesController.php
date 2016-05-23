@@ -92,11 +92,7 @@ class ArticlesController extends Controller
         return response($cursor)->headers;
     }
 
-    public function getClusters(Request $request) {
-        $this->validate($request, [
-            'cluster_id' => 'required',
-        ]);
-
+    public function getClusters() {
         $clusters =
             r\table('clusters')->run($this->conn);
 
