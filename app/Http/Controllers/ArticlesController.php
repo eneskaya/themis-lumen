@@ -109,7 +109,7 @@ class ArticlesController extends Controller
     public function getFeaturesForArticle(Request $request)
     {
         $this->validate($request, [
-            'article'   => 'required|numeric'
+            'article'   => 'required'
         ]);
 
         $article = r\table('pages2')->get($request->input('article'))->run($this->conn);
