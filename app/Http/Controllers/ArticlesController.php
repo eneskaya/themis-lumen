@@ -106,8 +106,17 @@ class ArticlesController extends Controller
         return response($response, 200)->header('Access-Control-Allow-Origin', '*');
     }
 
-    public function getArticlesForCluster(Request $request)
+    public function getFeaturesForArticle(Request $request)
     {
-        
+        $this->validate($request, [
+            'article'   => 'required|numeric'
+        ]);
+
+        $article = r\table('pages2')->get($request->input('article'))->run($this->conn);
+        $clusterId = $article['cluster_id'];
+
+        $features = r\table('clusters')->get($clusterId)->run($this->conn);
+
+        return response($features, 200)->header('Access-Control-Allow-Origin', '*');
     }
 }
