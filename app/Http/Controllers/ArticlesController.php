@@ -119,4 +119,40 @@ class ArticlesController extends Controller
 
         return response($features, 200)->header('Access-Control-Allow-Origin', '*');
     }
+
+    public function getAllRelatedArticlesForArticle(Request $request) {
+        $this->validate($request, [
+            'article' => 'required',
+        ]);
+
+        $article = r\table('pages2')->get($request->input('article'))->run($this->conn);
+        $clusterId = $article['cluster_id'];
+
+        $relatedCursor = r\table('pages2')->getAll($clusterId, ['index' => 'cluster_id'])->run($this->conn);
+
+        $results = collect();
+
+        foreach ($relatedCursor as $item) {
+            $results->push($item);
+        }
+
+        $results->shuffle();
+        $random = collect();
+
+        $response = $results;
+
+        if ($results->count() > 10) {
+
+            $response = collect();
+            for ($i = 0; $i < 10; $i++) {
+                $random->push(rand(0, $results->count()));
+            }
+
+            foreach ($random as $place) {
+                $response->push($results->get($place));
+            }
+        }
+
+        return response($response, 200)->header('Access-Control-Allow-Origin', '*');
+    }
 }
